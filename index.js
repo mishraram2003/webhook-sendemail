@@ -18,8 +18,8 @@ restService.post('/sendmail', function(req, res) {
     var returntext = "Mail has been sent to" +mailto + "with subject" +subject + "on" +date + "and content is" +content
 	
     return res.json({
-        speech: "mail is sent to" + mailto +" with subject" + subject ,
-        displayText: mailto + subject,
+        speech: returntext,
+        displayText: mailto + subject + date + content,
         source: 'webhook-sendemail'
     });
 });
