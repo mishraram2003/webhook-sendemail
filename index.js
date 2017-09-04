@@ -43,8 +43,8 @@ restService.post('/sendmail', function(req, res) {
 	req.end(); 
 		  
     return res.json({
-        speech: returntext,
-        displayText: returntext,
+        speech: post_data,
+        displayText: post_data,
         source: 'webhook-sendemail'
     });
 });
