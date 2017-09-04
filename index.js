@@ -18,6 +18,9 @@ restService.post('/sendmail', function(req, res) {
 	
 	var returntext = "Mail has been sent to" +mailto + "with subject" +subject + "on" +date + "and content is" +content
 	var http = require("http");
+	var post_data = '{"to":mailto,
+			  "subject":subject,
+			  "body":content}'; 
     var options = {
 		hostname: '10.52.104.158',
 		port: 8080,
@@ -38,7 +41,7 @@ restService.post('/sendmail', function(req, res) {
 	req.on('error', function(e) {
 		console.log('problem with request: ' + e.message);
 	});
-	req.write('{"string": "Hello, World"}');
+	req.write(post_data);
 	req.end(); 
 		  
     return res.json({
