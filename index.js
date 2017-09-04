@@ -23,7 +23,7 @@ restService.post('/sendmail', function(req, res) {
     }
    alert("hi");
     $.ajax({
-            url: 'http://localhost:8080/sendmail/outlook', // url where to submit the requesthttp://localhost:8086/RESTfulExample/rest/sendemail/outlook
+            url: 'http://10.52.104.158:8080/sendmail/outlook', // url where to submit the requesthttp://localhost:8086/RESTfulExample/rest/sendemail/outlook
             type : "POST", // type of action POST || GET
             dataType : 'json', // data type
             data: JSON.stringify(data),
