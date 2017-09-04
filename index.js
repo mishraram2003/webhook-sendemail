@@ -18,7 +18,7 @@ restService.post('/sendmail', function(req, res) {
 	
 	var returntext = "Mail has been sent to" +mailto + "with subject" +subject + "on" +date + "and content is" +content
 	var http = require("http");
-	var post_data = '{"to":mailto,"subject":subject,"body":content}'; 
+	var post_data = '{"to":"vijayalakshmi.gopalakrishna@sap.com","subject":"okay","body":"9999"}'; 
     var options = {
 		hostname: '10.52.104.158',
 		port: 8080,
