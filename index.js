@@ -12,34 +12,38 @@ restService.use(bodyParser.json());
 
 restService.post('/sendmail', function(req, res) {
     var mailto = req.body.result && req.body.result.parameters && req.body.result.parameters.emailto ? req.body.result.parameters.emailto : "Whom should I send the email to"
-    var subject = req.body.result && req.body.result.parameters && req.body.result.parameters.subject ? req.body.result.parameters.subject : "What the subject should be"
-    var date = req.body.result && req.body.result.parameters && req.body.result.parameters.date ? req.body.result.parameters.date : "When"
-    var content = req.body.result && req.body.result.parameters && req.body.result.parameters.Content ? req.body.result.parameters.Content : "What should the content of the mail be"
-    var returntext = "Mail has been sent to" +mailto + "with subject" +subject + "on" +date + "and content is" +content
-    var data = {
-        'subject': subject,
-        'to': mailto,
-        'body': content
-    }
-   alert("hi");
-    $.ajax({
-            url: 'http://10.52.104.158:8080/sendmail/outlook', // url where to submit the requesthttp://localhost:8086/RESTfulExample/rest/sendemail/outlook
-            type : "POST", // type of action POST || GET
-            dataType : 'json', // data type
-            data: JSON.stringify(data),
-            contentType: "application/json"	,			// post data || get data
-            success : function(result) {
-               // you can see the result from the console
-               // tab of the developer tools
-                console.log(result);
-            },
-            error: function(xhr, resp, text) {
-               console.log(xhr, resp, text);
-            }
-          });
+	var subject = req.body.result && req.body.result.parameters && req.body.result.parameters.subject ? req.body.result.parameters.subject : "What the subject should be"
+	var date = req.body.result && req.body.result.parameters && req.body.result.parameters.date ? req.body.result.parameters.date : "When"
+	var content = req.body.result && req.body.result.parameters && req.body.result.parameters.Content ? req.body.result.parameters.Content : "What should the content of the mail be"
+	
+	var returntext = "Mail has been sent to" +mailto + "with subject" +subject + "on" +date + "and content is" +content
+	var http = require("http");
+    var options = {
+		hostname: '10.52.104.158',
+		port: 8080,
+		path: '/sendmail/outlook',
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		}
+	};
+	var req = http.request(options, function(res) {
+		console.log('Status: ' + res.statusCode);
+		console.log('Headers: ' + JSON.stringify(res.headers));
+		res.setEncoding('utf8');
+		res.on('data', function (body) {
+			console.log('Body: ' + body);
+		});
+	});
+	req.on('error', function(e) {
+		console.log('problem with request: ' + e.message);
+	});
+	req.write('{"string": "Hello, World"}');
+	req.end(); 
+		  
     return res.json({
-        speech: returntext,
-        displayText: mailto + subject + date + content,
+        speech: retruntext,
+        displayText: retruntext,
         source: 'webhook-sendemail'
     });
 });
