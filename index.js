@@ -20,7 +20,7 @@ restService.post('/sendmail', function(req, res) {
 	var http = require("http");
 	var post_data = '{"to":"vijayalakshmi.gopalakrishna@sap.com","subject":"'+subject+'","body":"9999"}';
     var options = {
-		hostname: '10.52.104.158',
+		hostname: '10.206.138.50',
 		port: 8080,
 		path: '/sendmail/outlook',
 		method: 'POST',
